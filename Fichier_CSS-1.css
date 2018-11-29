@@ -1,0 +1,57 @@
+@charset "utf-8";
+/* CSS Document */
+header, footer{
+		background-color:#464646;
+		opacity: 0.8;
+}
+footer{
+		margin-top: 100px;
+}
+.haut img, .bas img{
+	vertical-align: middle;
+}
+.chapter {
+		text-decoration: none;
+		color:#faf0e6;
+		display: inline;
+		margin-left: 13.5%;
+		font-size: 150%;
+		font-family: 'Amatic SC', cursive;
+		letter-spacing: 5px;
+}
+.logohaut {margin-left: 0px}
+.chapter2{
+		text-decoration: none;
+		color:#faf0e6;
+		display: inline;
+		margin-left: 16%;
+		font-size: 100%;
+		font-family: calibri;
+}
+#FOOD1:hover, #SPORT1:hover, #MAKEUP1:hover, #US1:hover{
+		opacity: 0.5;
+}
+.FONCE1:hover{
+		opacity: 0.7;
+}
+img.FONCE1{
+   		 display: block;
+   		 margin-left: auto;
+    	 margin-right: auto;
+}
+.PICTURES{
+		width: 100%;
+		display: inline-block; 
+}
+.FOOD2, .SPORT2, .MAKEUP2{
+		width:30%;
+}
+.FOOD2:hover, .SPORT2:hover, .MAKEUP2:hover{
+		opacity: 0.9;
+}
+.FOOD2, .SPORT2, .MAKEUP2{
+		margin-left:2.2%;
+}
+body{
+background-color: #F0FDF8;
+}

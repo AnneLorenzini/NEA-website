@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Food_page</title>
+</head>
+
+<body>  
+	<header>
+		
+	<nav class="haut">
+		<a href="index.html" class="logo"><img src="Logo_NEA_clair.png" width="100" height="70" alt="Logo"/></a>
+			<a href="Nea-Website_FOOD.html" target="_blank" id="FOOD1" class="chapter">FOOD</a>
+			<a href="Nea-Website_SPORT.html" target="_blank" id="SPORT1" class="chapter">SPORT</a>
+			<a href="Nea-Website_MAKEUP.html" target="_blank" id="MAKEUP1" class="chapter">MAKE UP</a>
+			<a href="Nea-Website_US.html" target="_blank" id="US1" class="chapter">US</a>
+	</nav>
+</header>
+
+<div id="food_page" class="page-content">
+<link rel="stylesheet" href="Fichier_CSS-2.css">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+  <img src="FOOD2.png" class="food2" alt=""/>
+<h2 style="text-align: center;"><span>Basal metabolism</span></h2>
+	<h3>Calculate it!</h3>
+<div class="form-mini-container">
+<form class="form-mini" action="javascript:calcul();">
+<div class="form-row">
+<input id="taille" type="number" placeholder="Your size (in cm)" min="0" tabindex="1" />
+</div>
+<div class="form-row">
+<input id="poids" type="number" placeholder="Your weight (in kg)" min="0" tabindex="2" />
+</div>
+<div class="form-row">
+<input id="age" type="number" placeholder="Your age" min="0" tabindex="3" />
+</div>
+<div class="form-row">
+<label>
+<select id="sexe" tabindex="4">
+<option value="0">Woman</option>
+<option value="1">Man</option>
+</select>
+</label>
+</div>
+<div class="form-row form-last-row">
+<button type="submit" onclick="javascript:calcul();" name="calcul" id="calcul" tabindex="5">SHOW BASAL METABOLISM</button>
+</div>
+</form>
+</div>
+
+<script>
+function calcul(){
+	var taille = document.getElementById('taille').value;
+	var poids = document.getElementById('poids').value;
+	var age = document.getElementById('age').value;
+	var sexe = document.getElementById('sexe').value;
+	var conseil = false;
+	var conseilnormal = false;
+	var resultatarrondi = 0;
+	var calc = false;
+	var stringResult = '';
+	if (taille=='') {
+		stringResult += '<strong>Votre taille est incorrecte</strong>. Vous ne l\'avez pas renseignée.';
+	} else if (poids=='') {
+		stringResult += '<strong>Votre poids est incorrect</strong>. Vous ne l\'avez pas renseigné.';
+	}  else if (age=='') {
+		stringResult += '<strong>Votre &acirc;ge est incorrect</strong>. Vous ne l\'avez pas renseigné.';
+	} else if (isNaN(taille)) {
+		stringResult += '<strong>Votre taille est incorrecte</strong>. Elle doit être uniquement composé de chiffres, <strong>en centimètres</strong>.';	
+	} else if (isNaN(poids)) {
+		stringResult += '<strong>Votre poids est incorrect</strong>. Il doit être uniquement composé de chiffres.';
+	}  else if (isNaN(age)) {
+		stringResult += '<strong>Votre age est incorrect</strong>. Il doit être uniquement composé de chiffres.';
+	}  else if (isNaN(sexe)) {
+		stringResult += '<strong>Votre sexe est incorrect</strong>. Vous devez faire une sélection.';
+	} else {
+		calc = true;
+		var resultat = [];
+		var imc = poids/(taille/100*taille/100);
+		  
+		if (age<=60 && imc<25) {
+			if (sexe==0) {
+				// Femme
+				// resultat = (9.5634 * poids) + (184.96 * (taille/100)) - (4.6756 * age) + 655.0955;  
+				resultat['bmr'] = (9.740 * poids) + (172.9 * (taille/100)) - (4.737 * age) + 667.051;        
+			} else {
+				// Homme
+				// resultat = (13.7516 * poids) + (500.33 * (taille/100)) - (6.7550 * age) + 66.473;   
+				resultat['bmr'] = (13.707 * poids) + (492.3 * (taille/100)) - (6.673 * age) + 77.607;   
+			}
+		} else {
+			if (sexe==0) {
+				// Femme
+				resultat['bmr'] = 230 * (Math.pow(poids,0.48) * Math.pow(taille/100,0.50) * Math.pow(age,-0.13));
+			} else {
+				// Homme
+				resultat['bmr'] = 259 * (Math.pow(poids,0.48) * Math.pow(taille/100,0.50) * Math.pow(age,-0.13)) ;  
+			}
+		}
+		
+		resultat['bmr'] = Math.round(resultat['bmr']*100)/100;
+		
+		resultat['bmr_sedentaire'] = Math.round(resultat['bmr']*1.2*100)/100;
+		resultat['bmr_legerement_actif'] = Math.round(resultat['bmr']*1.375*100)/100; 
+		resultat['bmr_actif'] = Math.round(resultat['bmr']*1.55*100)/100;
+		resultat['bmr_tres_actif'] = Math.round(resultat['bmr']*1.725*100)/100;
+		resultat['bmr_extremement_actif'] = Math.round(resultat['bmr']*1.9*100)/100;
+		
+		stringResult = '<p style="text-align:center;"><span style="background-color:#464646; color:#FFF;padding:3px; font-size:19px; font-weight:bold; border-radius:4px">Your basal metabolism is of <strong>' + resultat['bmr'] + '</strong> kilocalories.</span></p><p style="text-align:center;">It represents what your body spends at rest. Depending on your physical activity, you spend a bit more energy that this : <strong>for example if you are active, you spend ' + resultat['bmr_actif'] + ' kilocaries per day</strong>.';
+
+		stringResult += '</p>';
+	}
+	
+	if (calc==true) {
+	
+		document.getElementById('resultat').innerHTML = '<p>' + stringResult + '</p>';
+
+		try {  
+			  var data = google.visualization.arrayToDataTable([
+				['Définition', 'Dépense journalière correspondante', {type: 'string', role: 'annotation'}],
+				['Métabolisme basal', resultat['bmr'], resultat['bmr'] + ' kcal'],
+				['Sédentaire', resultat['bmr_sedentaire'], resultat['bmr_sedentaire'] + ' kcal'],
+				['Légèrement actif', resultat['bmr_legerement_actif'], resultat['bmr_legerement_actif'] + ' kcal'],  
+				['Actif', resultat['bmr_actif'], resultat['bmr_actif'] + ' kcal'],
+				['Très actif', resultat['bmr_tres_actif'], resultat['bmr_tres_actif'] + ' kcal'],
+				['Extrêmement actif', resultat['bmr_extremement_actif'], resultat['bmr_extremement_actif'] + ' kcal']
+			  ]);
+		
+			  var options = {
+				title: 'Your daily energy expenditure',
+				chartArea: {width: '50%'},
+				legend: { position: "none" },
+				backgroundColor:'transparent',
+				colors:['#fca718'],
+				annotations: {
+				  alwaysOutside: true,
+				  textStyle: {
+					fontSize: 14,
+					auraColor: 'none' ,
+					color: '#000'
+				  },
+				  boxStyle: {
+					stroke: '#CCC',
+					strokeWidth: 1,
+					gradient: {
+					  color1: '#f2f2f2',
+					  color2: '#f2f2f2',
+					  x1: '0%', y1: '0%',
+					  x2: '100%', y2: '100%'
+					}
+				  }
+				},
+				hAxis: {
+				  title: 'Calories spent daily',
+				  minValue: 0,
+				}
+			  };
+			  var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+			  chart.draw(data, options);
+		} catch (e) {
+			// Erreur, on ne fait rien
+		}
+		window.location = '#resultat';
+		
+	} else {
+		document.getElementById('resultat').innerHTML = '<p style="text-align:center; margin-right:5px; background-color:#FFF7A8" id="clignote">' + stringResult + '</p>';
+	} 
+}
+</script>
+<script src="https://www.google.com/jsapi"></script>
+
+<div class="text">
+	<p><br>This is an estimation of the amount of energy (in cal) your body needs on a daily basis when it is at rest.<br><br>This will allow you to regulate your diet according to your basal metabolism, but also your daily energy expenditure. The more <strong>active</strong> you are, the more calories you <strong>burn</strong> and therefore need to absorb! </p></div>
+<h3>Your Results</h3>
+<div id="resultat">
+<p style="text-align: center;">Your basal metabolic rate is awaiting calculation. Once calculated we will provide an immediate interpretation.
+</p>
+</div>
+
+	</div>
+	<div class="receipes">
+		<h2>Our Healthy Receipes</h2>
+		<a href="https://www.marmiton.org/recettes/recette_blanquette-de-saumon_66761.aspx" target="_blank"><img src="blanquettesaumon.jpg" alt=""/></a>
+		<a href="https://www.marmiton.org/recettes/recette_filet-de-poulet-au-curry_80990.aspx" target="_blank"><img src="pouletcurry.jpg" alt=""/></a>
+		<a href="https://www.marmiton.org/recettes/recette_salade-tiede-de-quinoa-a-l-avocat_36710.aspx" target="_blank"><img src="saladeprintemps.jpg" alt=""/></a>
+		<a href="https://www.marmiton.org/recettes/recette_soupe-de-champignons_24874.aspx" target="_blank"><img src="soupechampignons.jpg" alt=""/></a>
+		<a href="https://www.marmiton.org/recettes/recette_spaghetti-aux-courgettes_10951.aspx" target="_blank"><img src="spaghetiiscourgette.jpg" alt=""/></a>
+	<div class="titre-recettes">Salmon Blanquette</div>
+	<div class="titre-recettes">Curry Chicken</div>
+	<div class="titre-recettes">Spring Salad</div>
+	<div class="titre-recettes">Mushroom Soup</div>
+		<div class="titre-recettes">Zucchini Spaghetti</div></div>
+
+	<footer>
+	<nav class="bas">
+			<img src="Logo_NEA_clair.png" width="100" height="70" alt="Logo"/>
+			<a href="Nea-Website_US.html" target="_blank" id="NOUSCONTACTER" class="chapter2">Contact US</a>
+			<a href="Nea-Website_US.html" target="_blank" id="APROPOS" class="chapter2">About US</a>
+			<div id="CGV" class="chapter2">General conditions</div>
+	</nav>
+</footer>
+
+</body>
+</html>

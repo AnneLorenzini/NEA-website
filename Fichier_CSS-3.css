@@ -1,0 +1,206 @@
+@charset "utf-8";
+/* CSS Document */
+header, footer{
+    background-color:#464646;
+    opacity: 0.8;
+}
+footer{
+    margin-top: 100px;
+}
+.haut img, .bas img{
+  vertical-align: middle;
+}
+.chapter {
+    text-decoration: none;
+    color:#faf0e6;
+    display: inline;
+    margin-left: 13.5%;
+    font-size: 150%;
+    font-family: 'Amatic SC', cursive;
+    letter-spacing: 5px;
+}
+.logohaut {margin-left: 0px}
+.chapter2{
+    text-decoration: none;
+    color:#faf0e6;
+    display: inline;
+    margin-left: 16%;
+    font-size: 100%;
+    font-family: calibri;
+}
+#FOOD1:hover, #SPORT1:hover, #MAKEUP1:hover, #US1:hover{
+    opacity: 0.5;
+}
+h1{
+    text-decoration: none;
+    color:#9E9E9E;
+    display: block;
+    text-align: center;
+    font-size: 260%;
+    font-family: 'Amatic SC';
+    letter-spacing: 5px;
+  }
+h2{text-decoration: none;
+    color:#9E9E9E;
+    display: block;
+    text-align: center;
+    font-size: 260%;
+    font-family: 'Amatic SC';
+  letter-spacing: 5px;}
+
+
+body {font-family: 'calibri';
+background-color: #F0FDF8;}
+.form-mini-container {text-align: center;
+}
+p {width:700px;
+  text-align:center;
+  display: block;
+
+}
+
+
+
+/*nous contacter :interactions avec images et responsive*/
+div.gallery {
+    border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.responsive {
+    padding: 0 6px;
+    float: left;
+    width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px) {
+    .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+.container2 {
+}
+
+}
+
+@media only screen and (max-width: 500px) {
+    .responsive {
+        width: 100%;
+    }
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/*nous contacter: hovering text over image*/
+* {box-sizing: border-box;}
+
+.container2 {
+  position: relative;
+  width: 50%;
+  max-width: 300px;
+  display: block;
+}
+
+.image{
+       display: block;
+       margin-left: 33%;
+       margin-right: auto;
+       height: 300px;
+}
+
+.overlay {
+  position: absolute; 
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: antiquewhite; 
+  width: 200%;
+  transition: .5s ease;
+  opacity:0;
+  color: papayawhip;
+  font-size: 20px;
+  font-family: 'Amatic SC';
+  padding: 20px;
+  text-align: center;
+}
+
+.container2:hover .overlay {
+  opacity: 1;
+}
+
+
+
+
+
+
+/*la partie nous contacter, fiche de contact*/
+
+* {
+    box-sizing: border-box;
+}
+
+/* Style inputs */
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+/* Style the container/contact section */
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+/* Create two columns that float next to eachother */
+.column {
+    float: left;
+    width: 50%;
+    margin-top: 6px;
+    padding: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
